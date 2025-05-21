@@ -35,7 +35,9 @@
             alt="Product 1"
           />
         </td>
-        <td [title]="product.title" class="productTitle">{{ product.title }}</td>
+        <td [title]="product.title" class="productTitle">
+          {{ product.title }}
+        </td>
         <td>{{ product.category.name }}</td>
         <td>{{ product.price }} EGP</td>
         @if (+product.quantity > +product.sold) {
@@ -121,14 +123,29 @@
         </div>
         <div class="col-lg-6">
           <label for="category" class="fw-normal">Category</label>
-          <input
+
+          <select
+            name="category"
+            id="category"
+            class="form-select my-2"
+            aria-label="Default select example"
+            [(ngModel)]="newProduct.category.name"
+          >
+            <option value="" disabled selected>Choose....</option>
+            @for (cat of allCategories; track $index) {
+            <option [value]="cat">
+              {{ cat }}
+            </option>
+            }
+          </select>
+          <!-- <input
             type="text"
             class="form-control py-2 rounded-0 my-2"
             id="category"
             name="category"
             placeholder="Category"
             [(ngModel)]="newProduct.category.name"
-          />
+          /> -->
         </div>
 
         <div class="col-lg-6">
@@ -210,14 +227,29 @@
         </div>
         <div class="col-lg-6">
           <label for="category" class="fw-normal">Category</label>
-          <input
+
+          <select
+            name="category"
+            id="category"
+            class="form-select my-2 py-2"
+            [(ngModel)]="productToEdit.category.name"
+          >
+            <option value="" disabled selected>Choose....</option>
+            @for (cat of allCategories; track $index) {
+            <option [value]="cat">
+              {{ cat }}
+            </option>
+            }
+          </select>
+
+          <!-- <input
             type="text"
             class="form-control py-2 rounded-0 my-2"
             id="category"
             name="category"
             placeholder="Category"
             [(ngModel)]="productToEdit.category.name"
-          />
+          /> -->
         </div>
 
         <div class="col-lg-6">
