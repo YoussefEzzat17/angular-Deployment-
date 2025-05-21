@@ -1,0 +1,72 @@
+.navbar-brand img {
+  width: 50px;
+  padding: 0;
+}
+.nav-link {
+  transition: unset !important;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.active-link {
+  color: black;
+  font-weight: 600;
+}
+.icons > li i {
+  font-size: 17px;
+  transition: 0.3s;
+}
+.icons > li:hover i {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+.icons > li:last-child:hover i {
+  animation: logout infinite alternate 0.2s;
+}
+
+.logout {
+  background-color: #333;
+  color: #fff;
+}
+.logout:hover {
+  background-color: #222;
+}
+.nav-item {
+  padding: 0 10px;
+  font-size: 17px;
+}
+
+.cart-badge {
+  font-size: 0.7rem;
+  position: absolute;
+  top: 5px;          
+  left: 80%;
+  transform: translate(-50%, 10%);
+}
+
+@media (max-width: 575.98px) {
+  .cart-badge {
+    left: 60%;     
+    font-size: 0.6rem;
+    top: 4px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .cart-badge {
+    left: 60%;
+    font-size: 0.65rem;
+    top: 5px;
+  }
+}
+
+
+
+@keyframes logout {
+  0% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
