@@ -1,3 +1,4 @@
+import { CategoryService } from './../../util/services/category.service';
 import { DashboardService } from './../../util/services/dashboard.service';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Iproduct } from '../../util/interfaces/iproduct';
@@ -15,6 +16,7 @@ export class ProductsDashboardComponent {
   productList: Iproduct[] = [];
   constructor(
     private DashboardService: DashboardService,
+    private CategoryService: CategoryService,
     private cdr: ChangeDetectorRef,
     private snackBar: MatSnackBar
   ) {}
@@ -23,6 +25,7 @@ export class ProductsDashboardComponent {
     this.DashboardService.getAllAdminProducts().subscribe({
       next: (res) => {
         this.productList = res.products;
+        this.getAllCategories();
       },
       error: (err) => console.error(err),
     });
@@ -105,9 +108,9 @@ export class ProductsDashboardComponent {
         this.isPopupVisible = false;
         this.cdr.detectChanges();
 
-        this.addCategory({
-          name: this.newProduct.category.name,
-        });
+        // this.addCategory({
+        //   name: this.newProduct.category.name,
+        // });
 
         this.newProduct = {
           title: '',
@@ -253,6 +256,18 @@ export class ProductsDashboardComponent {
           duration: 4000,
           panelClass: ['custom-snackbar'],
         });
+        console.error(err);
+      },
+    });
+  }
+
+  allCategories: string[] = [];
+  getAllCategories() {
+    this.CategoryService.getAllCategories().subscribe({
+      next: (res) => {
+        res.data.map((cat: any) => this.allCategories.push(cat.name));
+      },
+      error: (err) => {
         console.error(err);
       },
     });
