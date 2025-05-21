@@ -1,0 +1,195 @@
+<div class="container py-5">
+  <div class="row align-items-center">
+    <div class="col-lg-5 offset-lg-1">
+      <div class="image rounded-3 mb-1">
+        <owl-carousel-o [options]="mainCarouselOptions">
+          @for (image of productDetails.images; track $index) {
+          <ng-template carouselSlide>
+            <div class="imageContainer">
+              <img
+                crossorigin="anonymous"
+                [src]="serverURL + image"
+                [alt]="productDetails.title"
+                class="w-100 rounded-3"
+              />
+            </div> </ng-template
+          >}
+        </owl-carousel-o>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="details">
+        <div
+          class="head d-flex justify-content-between align-items-center mt-5 mt-lg-0"
+        >
+          <a
+            class="btn btn-light btn-sm border border-1 px-4"
+            [routerLink]="['/categories', productDetails.category.name]"
+          >
+            {{ productDetails.category.name }}
+          </a>
+          @if (!isAdmin) {
+
+          <button
+            class="bg-transparent border-0"
+            (click)="toggleWishlist(productDetails._id)"
+          >
+            <i
+              class="bi"
+              [ngClass]="
+                isItemInWhishlist(productDetails._id)
+                  ? 'bi-heart-fill text-danger'
+                  : 'bi-heart'
+              "
+            ></i>
+          </button>
+          }
+        </div>
+        <h1 class="h3 mt-3 mb-4 fw-bold text-light-emphasis">
+          {{ productDetails.title }}
+        </h1>
+
+        <p class="desc text-light-emphasis">
+          {{ productDetails.description }}
+        </p>
+        <h4 class="fw-bold my-4 text-light-emphasis">
+          {{ productDetails.price }} EGP
+        </h4>
+        <!-- <div class="quantity my-4">
+          <button
+            class="btn btn-light btn-sm border border-1 fw-semibold py-1 px-3"
+          >
+            -
+          </button>
+          <span class="mx-3">1</span>
+          <button
+            class="btn btn-light btn-sm border border-1 fw-semibold py-1 px-3"
+          >
+            +
+          </button>
+        </div> -->
+
+        @if (!isAdmin) {
+        <div class="btns d-flex justify-content-start">
+          <a
+            class="btn btn-light fw-semibold border border-1 btn-sm py-3 px-4 me-3 w-100"
+            (click)="addToCart(productDetails._id)"
+          >
+            ADD TO CART
+          </a>
+          <!-- <a class="btn btn-dark btn-sm fw-semibold py-3 px-4 flex-grow-1">
+            BUY NOW
+          </a> -->
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="col-lg-10 offset-lg-1">
+      @if (!isAdmin) {
+      <div class="addComment mt-5">
+        <input
+          type="text"
+          class="form-control py-2 rounded-0"
+          placeholder="Add Reveiw...."
+          [(ngModel)]="userComment"
+        />
+        <!-- <textarea placeholder="Add Reveiw...."></textarea> -->
+
+        <fa-icon
+          [icon]="faPaperPlane"
+          class="fs-5 border border-1 btn btn-light rounded-0 text-secondary"
+          (click)="addComment()"
+        ></fa-icon>
+      </div>
+      }
+      <div class="comment my-4 rounded-2">
+        <h4 class="py-1 m-0 text-light-emphasis">Reveiws</h4>
+        <hr />
+
+        @if (productComments.length !== 0 ) { @for (userComment of
+        productComments; track $index) {
+        <div class="userReview d-flex gap-4 mb-2 rounded-2 px-3 py-2">
+          <div class="userImage">
+            <img
+              crossorigin="anonymous"
+              [src]="serverURL + userComment.avatar"
+              class="rounded-2"
+              alt="userImage"
+            />
+          </div>
+          <div class="userComment text-light-emphasis flex-grow-1">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="fw-bold m-0">{{ userComment.userName }}</h6>
+              <div>
+                <span
+                  >{{ userComment.createdAt | date : "yyyy-MM-dd" }} at
+                  {{ userComment.createdAt | date : "shortTime" }}</span
+                >
+                @if (userComment.userId === user.userID) {
+
+                <span
+                  class="ms-3 editComment"
+                  (click)="editPopupIsOpen(userComment._id)"
+                  ><i class="fa-solid fa-pen-to-square"></i
+                ></span>
+                <span
+                  class="ms-2 delComment"
+                  (click)="deleteComment(productDetails._id, userComment._id)"
+                  ><i class="fa-solid fa-trash"></i
+                ></span>
+                }
+              </div>
+            </div>
+            <p class="m-0 text-break">
+              {{ userComment.comment }}
+            </p>
+          </div>
+        </div>
+        }} @if(productComments.length === 0) {
+        <div class="noComment text-center">
+          <h5 class="text-light-emphasis">No Comments Yet</h5>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+@if (editPopupIsOpened) {
+<div class="overlay">
+  <div class="popUp-AddProduct rounded-2 shadow-sm p-3 bg-white overflow-auto">
+    <form>
+      <div class="head">
+        <h4>Edit comment</h4>
+        <button
+          type="button"
+          class="btn-close position-absolute top-0 end-0 me-3 mt-3"
+          (click)="editPopupIsClosed()"
+        ></button>
+      </div>
+      <hr />
+      <div class="row g-4">
+        <div class="col-12">
+          <input
+            type="text"
+            class="form-control py-2 rounded-0 my-2"
+            id="comment"
+            name="comment"
+            placeholder="comment"
+            [(ngModel)]="newComment"
+          />
+        </div>
+      </div>
+    </form>
+
+    <button
+      class="btn btn-sm btn-success mt-4 w-100"
+      (click)="editComment(productDetails._id)"
+    >
+      Edit
+    </button>
+  </div>
+</div>
+}

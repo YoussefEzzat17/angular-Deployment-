@@ -1,0 +1,285 @@
+<div class="header d-flex justify-content-between align-items-center mb-3">
+  <h3 class="lead mb-0 fs-3 fw-medium">Products</h3>
+  <button class="btn btn-success btn-sm" (click)="openPopup()">
+    Add New Product
+  </button>
+</div>
+
+<div class="table-responsive rounded-2 mb-4">
+  <table class="table table-dark table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="py-3 fw-normal" scope="col">Image</th>
+        <th class="py-3 fw-normal" scope="col">Name</th>
+        <th class="py-3 fw-normal" scope="col">Category</th>
+        <th class="py-3 fw-normal" scope="col">Price</th>
+        <th class="py-3 fw-normal" scope="col">Status</th>
+        <th class="py-3 fw-normal" scope="col">Stock</th>
+        <th class="py-3 fw-normal" scope="col">Created At</th>
+        <th class="py-3 fw-normal" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (productList.length !== 0) {
+
+      <tr *ngFor="let product of productList">
+        <td>
+          <img
+            crossorigin="anonymous"
+            [src]="
+              product.imageCover.startsWith('user')
+                ? serverURL + product.imageCover
+                : product.imageCover
+            "
+            class="rounded-circle object-fit-cover"
+            alt="Product 1"
+          />
+        </td>
+        <td [title]="product.title" class="productTitle">
+          {{ product.title }}
+        </td>
+        <td>{{ product.category.name }}</td>
+        <td>{{ product.price }} EGP</td>
+        @if (+product.quantity > +product.sold) {
+        <td><span class="badge fw-normal bg-success">Available</span></td>
+        } @else {
+        <td><span class="badge fw-normal bg-danger">Unavailable</span></td>
+        }
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.createdAt.split("T")[0] }}</td>
+        <td>
+          <button
+            class="btn btn-success btn-sm me-2"
+            (click)="openPopupForEdit(product._id)"
+          >
+            Edit
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteProduct(product._id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      } @else {
+      <tr>
+        <td colspan="12" class="text-center pt-3">
+          <h5 class="lead">No Products Found</h5>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (isPopupVisible) {
+<div class="overlay">
+  <div class="popUp-AddProduct rounded-2 shadow-sm p-3 bg-white overflow-auto">
+    <form>
+      <div class="head">
+        <h4>Add Product</h4>
+        <button
+          type="button"
+          class="btn-close position-absolute top-0 end-0 me-3 mt-3"
+          (click)="closePopup()"
+        ></button>
+      </div>
+      <hr />
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <label for="title" class="fw-normal">Title</label>
+          <input
+            type="text"
+            class="form-control py-2 rounded-0 my-2"
+            id="title"
+            name="title"
+            placeholder="Title"
+            [(ngModel)]="newProduct.title"
+          />
+        </div>
+
+        <div class="col-lg-6">
+          <label for="description" class="fw-normal">Description</label>
+          <input
+            type="text"
+            class="form-control py-2 rounded-0 my-2"
+            id="description"
+            name="description"
+            placeholder="Description"
+            [(ngModel)]="newProduct.description"
+          />
+        </div>
+        <div class="col-lg-6">
+          <label for="quantity" class="fw-normal">Quantity</label>
+          <input
+            type="text"
+            class="form-control py-2 rounded-0 my-2"
+            id="quantity"
+            name="quantity"
+            placeholder="Quantity"
+            [(ngModel)]="newProduct.quantity"
+          />
+        </div>
+        <div class="col-lg-6">
+          <label for="category" class="fw-normal">Category</label>
+
+          <select
+            name="category"
+            id="category"
+            class="form-select my-2"
+            aria-label="Default select example"
+            [(ngModel)]="newProduct.category.name"
+          >
+            <option value="" disabled selected>Choose....</option>
+            @for (cat of allCategories; track $index) {
+            <option [value]="cat">
+              {{ cat }}
+            </option>
+            }
+          </select>
+          <!-- <input
+            type="text"
+            class="form-control py-2 rounded-0 my-2"
+            id="category"
+            name="category"
+            placeholder="Category"
+            [(ngModel)]="newProduct.category.name"
+          /> -->
+        </div>
+
+        <div class="col-lg-6">
+          <label for="productPrice" class="fw-normal">Price</label>
+          <input
+            type="number"
+            class="form-control py-2 rounded-0 my-2"
+            id="productPrice"
+            name="productPrice"
+            placeholder="Price"
+            [(ngModel)]="newProduct.price"
+          />
+        </div>
+        <div class="col-lg-6">
+          <label for="productImages" class="fw-normal">Choose Images</label>
+          <input
+            type="file"
+            multiple
+            class="form-control py-2 rounded-0 my-2"
+            id="productImages"
+            name="images"
+          />
+        </div>
+      </div>
+    </form>
+
+    <button class="btn btn-sm btn-success mt-4 w-100" (click)="addProduct()">
+      Add Product
+    </button>
+  </div>
+</div>
+} @if (isPopupForEdit) {
+<div class="overlay">
+  <div class="popUp-AddProduct rounded-2 shadow-sm p-3 bg-white overflow-auto">
+    <form>
+      <div class="head">
+        <h4>Edit Product</h4>
+        <button
+          type="button"
+          class="btn-close position-absolute top-0 end-0 me-3 mt-3"
+          (click)="closePopupForEdit()"
+        ></button>
+      </div>
+      <hr />
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <label for="title" class="fw-normal">Title</label>
+          <input
+            type="text"
+            class="form-control py-2 rounded-0 my-2"
+            id="title"
+            name="title"
+            placeholder="Title"
+            [(ngModel)]="productToEdit.title"
+          />
+        </div>
+
+        <div class="col-lg-6">
+          <label for="description" class="fw-normal">Description</label>
+          <input
+            type="text"
+            class="form-control py-2 rounded-0 my-2"
+            id="description"
+            name="description"
+            placeholder="Description"
+            [(ngModel)]="productToEdit.description"
+          />
+        </div>
+        <div class="col-lg-6">
+          <label for="quantity" class="fw-normal">Quantity</label>
+          <input
+            type="text"
+            class="form-control py-2 rounded-0 my-2"
+            id="quantity"
+            name="quantity"
+            placeholder="Quantity"
+            [(ngModel)]="productToEdit.quantity"
+          />
+        </div>
+        <div class="col-lg-6">
+          <label for="category" class="fw-normal">Category</label>
+
+          <select
+            name="category"
+            id="category"
+            class="form-select my-2 py-2"
+            [(ngModel)]="productToEdit.category.name"
+          >
+            <option value="" disabled selected>Choose....</option>
+            @for (cat of allCategories; track $index) {
+            <option [value]="cat">
+              {{ cat }}
+            </option>
+            }
+          </select>
+
+          <!-- <input
+            type="text"
+            class="form-control py-2 rounded-0 my-2"
+            id="category"
+            name="category"
+            placeholder="Category"
+            [(ngModel)]="productToEdit.category.name"
+          /> -->
+        </div>
+
+        <div class="col-lg-6">
+          <label for="productPrice" class="fw-normal">Price</label>
+          <input
+            type="number"
+            class="form-control py-2 rounded-0 my-2"
+            id="productPrice"
+            name="productPrice"
+            placeholder="Price"
+            [(ngModel)]="productToEdit.price"
+          />
+        </div>
+
+        <div class="col-lg-6">
+          <label for="editProductImages" class="fw-normal">Choose Images</label>
+          <input
+            type="file"
+            multiple
+            class="form-control py-2 rounded-0 my-2"
+            id="editProductImages"
+            name="images"
+          />
+        </div>
+      </div>
+    </form>
+
+    <button class="btn btn-sm btn-success mt-4 w-100" (click)="editProduct()">
+      Edit Product
+    </button>
+  </div>
+</div>
+}

@@ -1,0 +1,57 @@
+<h3 class="lead mb-3 fs-3 fw-medium">Orders</h3>
+
+<div class="table-responsive rounded-2 mb-4">
+  <table class="table table-dark table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="py-3 fw-normal" scope="col">Order ID</th>
+        <th class="py-3 fw-normal" scope="col">Product</th>
+        <th class="py-3 fw-normal" scope="col">Amount</th>
+        <th class="py-3 fw-normal" scope="col">quantity</th>
+        <th class="py-3 fw-normal" scope="col">Order Date</th>
+        <th class="py-3 fw-normal" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (usersOrders.length !==0) { @for (order of usersOrders; track $index)
+      {
+      <tr>
+        <td class="py-3">{{ order._id }}</td>
+        <td class="py-3">
+          @for (product of order.products; track $index) { @if (product.adminId
+          === adminID) {
+          <span class="my-2 d-block orderTitle" [title]="product.title">{{
+            product.title
+          }}</span>
+          } }
+        </td>
+        <td class="py-3">{{ order.total }} EGP</td>
+        <td class="py-3">
+          @for (pro of order.products; track $index) { @if (adminID
+          ===pro.adminId ) {
+
+          {{ pro.quantity }} <br />
+          } }
+        </td>
+
+        <td class="py-3">{{ order.createdAt.split("T")[0] }}</td>
+        <td class="py-3">
+          <button
+            class="btn btn-success btn-sm"
+            (click)="completeOrder(order._id)"
+          >
+            Completed
+          </button>
+        </td>
+      </tr>
+      }} @else {
+      <tr>
+        <td colspan="12" class="text-center pt-3">
+          <h5 class="lead">No Orders Found</h5>
+        </td>
+      </tr>
+
+      }
+    </tbody>
+  </table>
+</div>
