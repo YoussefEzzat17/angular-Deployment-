@@ -1,0 +1,14 @@
+.nav-link {
+  transition: unset !important;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.active-link {
+  color: black;
+  font-weight: bold;
+}
+.navbar-brand img {
+  width: 50px;
+  padding: 0;
+}

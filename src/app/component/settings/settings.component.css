@@ -1,0 +1,32 @@
+.info .userImage .imgContainer {
+    width: 150px;
+    height: 150px;
+  }
+  .info .userImage .imgContainer fa-icon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 110px;
+    left: 110px;
+    transition: 0.3s;
+  }
+  .info .userImage .imgContainer fa-icon:hover {
+    background-color: #444444 !important;
+    color: #fff !important;
+    border: 1px solid #aeaeae;
+  }
+  
+  .info .userImage .imgContainer img {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  
+  .info .details input {
+    box-shadow: none;
+  }
+  
+  #avatar {
+    display: none;
+  }

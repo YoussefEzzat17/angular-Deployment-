@@ -1,0 +1,147 @@
+<h3 class="lead mb-3 fs-3 fw-medium">Overview</h3>
+<div class="row g-3">
+  <div class="col-md-6 col-lg-3">
+    <div class="card p-3 bg-dark text-white">
+      <div class="icon">
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <h6 class="lead">Total visitors</h6>
+      <h5>{{ customerNumbers }}</h5>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3">
+    <div class="card p-3 bg-dark text-white">
+      <div class="icon">
+        <i class="fa-solid fa-truck-fast"></i>
+      </div>
+      <h6 class="lead">Total Orders</h6>
+      <h5>{{ usersCustomers.length }}</h5>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3">
+    <div class="card p-3 bg-dark text-white">
+      <div class="icon">
+        <i class="fa-solid fa-money-check-dollar"></i>
+      </div>
+      <h6 class="lead">Total sales</h6>
+      <h5>{{ total }} EGP</h5>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3">
+    <div class="card p-3 bg-dark text-white">
+      <div class="icon">
+        <i class="fa-solid fa-box-open"></i>
+      </div>
+      <h6 class="lead">Total products</h6>
+      <h5>{{ allAdminProducts }}</h5>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 my-4">
+  <div class="col-xl-8">
+    <div
+      class="rounded-2 shadow-lg p-4 d-flex flex-column justify-content-center align-items-center"
+    >
+      <h4>Target</h4>
+
+      <ngx-charts-gauge
+        [results]="gaugeData"
+        [min]="0"
+        [max]="100"
+        [view]="view"
+        [animations]="true"
+      >
+      </ngx-charts-gauge>
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <div class="productContainer rounded-2 shadow-lg p-4">
+      <h5>Top Products</h5>
+
+      @if(productList.length !== 0) { @for (product of productList.slice(0,4);
+      track $index) {
+
+      <div
+        class="product d-flex justify-content-between align-items-center mt-3"
+      >
+        <div class="info d-flex align-items-center gap-2">
+          <div class="img">
+            <img
+              crossorigin="anonymous"
+              [src]="
+                product.imageCover.startsWith('user')
+                  ? serverURL + productList[uniqueProduct[+$index]].imageCover
+                  : product.imageCover
+              "
+              class="rounded-circle"
+              alt=""
+            />
+          </div>
+          <div class="text">
+            <h6
+              class="m-0 lead fs-6"
+              [title]="productList[uniqueProduct[+$index]].title"
+            >
+              {{ product.title }}
+            </h6>
+            <p class="m-0 text-muted fs-6">
+              {{ productList[uniqueProduct[+$index]].category.name }}
+            </p>
+          </div>
+        </div>
+        <div class="price">
+          <p class="m-0 fw-normal">
+            {{ productList[uniqueProduct[+$index]].price }} EGP
+          </p>
+        </div>
+      </div>
+      } }@else {
+      <h5
+        class="lead text-center h-75 d-flex justify-content-center align-items-center"
+      >
+        No Products Found
+      </h5>
+      }
+    </div>
+  </div>
+  <div class="col-xl-8">
+    <div
+      class="rounded-2 shadow-lg p-4 d-flex flex-column justify-content-center align-items-center"
+    >
+      <h4 class="">Products Statistic</h4>
+
+      <ngx-charts-bar-horizontal
+        [results]="Staticsdata"
+        [view]="Staticview"
+        [xAxis]="true"
+        [yAxis]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="'Total sales'"
+        [yAxisLabel]="'Products'"
+      >
+      </ngx-charts-bar-horizontal>
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <div class="categoriesContainer rounded-2 shadow-lg p-4">
+      <h5 class="mb-3">Top Categories</h5>
+      @if(uniqueAdminCategories.length !== 0) { @for (category of
+      uniqueAdminCategories.slice(0,4); track $index) {
+      <div class="category mt-3">
+        <div class="bg-secondary-subtle text-center p-3 rounded-2">
+          <h6 class="m-0 fs-6 lead">{{ category }}</h6>
+        </div>
+      </div>
+
+      }} @else {
+      <h5
+        class="lead text-center h-75 d-flex justify-content-center align-items-center"
+      >
+        No Categories Found
+      </h5>
+      }
+    </div>
+  </div>
+</div>

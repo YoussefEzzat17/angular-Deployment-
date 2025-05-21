@@ -1,0 +1,41 @@
+.card {
+  text-align: center;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.card:hover {
+  transform: scale(1.03);
+}
+h5:last-child {
+  transition: 0.3s;
+}
+.card:hover h5:last-child {
+  transform: scale(1.3);
+}
+.card .icon {
+  font-size: 30px;
+  color: #ffffff;
+}
+
+.info .img img {
+  width: 50px;
+  height: 50px;
+}
+
+.info h6 {
+  width: 110px;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+.info h6 + p {
+  width: 110px;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.productContainer,
+.categoriesContainer {
+  height: 336px;
+}

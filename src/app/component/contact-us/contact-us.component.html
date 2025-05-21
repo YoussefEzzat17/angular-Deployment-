@@ -1,0 +1,89 @@
+<section class="container d-flex flex-column flex-md-row gap-5 mt-5">
+  <div class="w-100 w-md-50 ">
+    <div>
+      <h2>Let's Collaborate</h2>
+      <p>The Best electronics products continue to drive innovation we live, work, and interact with our environment opportunities customers to test out products before making a purchase.innovation, we live, work, and interact with our environment, opportunities</p>
+    </div>
+    <div>
+      <h3>Phone</h3>
+      <p>+(2) 123-456-789</p>
+    </div>
+    <div>
+      <h3>Email</h3>
+      <p>support&#64;suppert.com</p>
+    </div>
+    <div>
+      <h3>Head office</h3>
+      <p>70 Washington SquareNew York, NY 10012, USA</p>
+    </div>
+  </div>
+  <form (submit)="submit()" class="w-100 w-md-50" [formGroup]="FeedBackForm">
+    <h2>Say Hello</h2>
+    <div class="con">
+      <div>
+        <input type="text" placeholder="Name:" formControlName="name">
+        @if(FeedBackForm.get('name')?.errors && (FeedBackForm.get('name')?.touched || FeedBackForm.get('name')?.dirty)){
+          @if(FeedBackForm.get('name')?.getError('required')){
+            <p class="error2 bg-danger p-2 text-white mt-1 border border-danger rounded-2">The Name is Required</p>
+          }
+          @if(FeedBackForm.get('name')?.getError('minlength')){
+            <p class="error2 bg-danger p-2 text-white mt-1 border border-danger rounded-2">The Minmum Length is 3 Char</p>
+          }
+        }
+      </div>
+      <div>
+        <input type="text" placeholder="Email:" formControlName="email">
+        @if(FeedBackForm.get('email')?.errors && (FeedBackForm.get('email')?.touched || FeedBackForm.get('email')?.dirty)){
+          @if(FeedBackForm.get('email')?.getError('required')){
+            <p class="error2 bg-danger p-2 text-white mt-1 border border-danger rounded-2">The Email is Required</p>
+          }
+          @if(FeedBackForm.get('email')?.getError('email')){
+            <p class="error2 bg-danger p-2 text-white mt-1 border border-danger rounded-2">The Email Not Valid</p>
+          }
+        }
+      </div>
+      <div>
+        <input type="text" placeholder="Phone number:" formControlName="phone">
+        @if(FeedBackForm.get('phone')?.errors && (FeedBackForm.get('phone')?.touched || FeedBackForm.get('phone')?.dirty)){
+          @if(FeedBackForm.get('phone')?.getError('required')){
+            <p class="error2 bg-danger p-2 text-white mt-1 border border-danger rounded-2">The Phone is Required</p>
+          }
+          @if(FeedBackForm.get('phone')?.getError('pattern')){
+            <p class="error2 bg-danger p-2 text-white mt-1 border border-danger rounded-2">The Phone Not Valid</p>
+          }
+        }
+      </div>
+      <div>
+        <textarea title="message" placeholder="Message" formControlName="message"></textarea>
+        @if(FeedBackForm.get('message')?.errors && (FeedBackForm.get('message')?.touched || FeedBackForm.get('message')?.dirty)){
+          @if(FeedBackForm.get('message')?.getError('required')){
+            <p class="error2 bg-danger p-2 text-white mt-1 border border-danger rounded-2">The Message is Required</p>
+          }
+          @if(FeedBackForm.get('message')?.getError('minlength')){
+            <p class="error2 bg-danger p-2 text-white mt-1 border border-danger rounded-2">The Minmum Length is 3 Char</p>
+          }
+        }
+      </div>
+    </div>
+    <input [ngStyle]="!FeedBackForm.valid ? {
+      'cursor': 'not-allowed',
+      'background-color': '#00000099',
+      'color': 'white'
+    } : {
+      'cursor': 'pointer',
+      'background-color': 'black',
+      'color': 'white'
+    }"
+    [disabled]="!FeedBackForm.valid"  type="submit" value="Send Now" >
+    @if(successMessage ){
+      <p class="bg-success text-white p-2 rounded-2 text-center mt-2">{{successMessage}} </p>
+    }
+    @if(errorMessage ){
+      <p class="bg-danger text-white p-2 rounded-2 text-center mt-2">{{errorMessage}} </p>
+    }
+  </form>
+</section>
+
+<section>
+  <iframe class="map " src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55251.37809418713!2d31.217264795135883!3d30.0594820282634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1746019086285!5m2!1sen!2seg" width="600" height="460" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
