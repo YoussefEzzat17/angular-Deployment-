@@ -37,7 +37,7 @@ export class SettingsComponent {
     email: '',
   };
 
-  serverURL = 'http://localhost:4000/uploads/';
+  serverURL = 'https://ecommerceapi-production-8d5f.up.railway.app/uploads/';
 
   ngOnInit(): void {
     const token = document.cookie
