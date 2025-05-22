@@ -1,5 +1,5 @@
-import { CategoryService } from './../../util/services/category.service';
-import { DashboardService } from './../../util/services/dashboard.service';
+import { CategoryService } from '../../util/services/category.service';
+import { DashboardService } from '../../util/services/dashboard.service';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Iproduct } from '../../util/interfaces/iproduct';
 import { CommonModule } from '@angular/common';
