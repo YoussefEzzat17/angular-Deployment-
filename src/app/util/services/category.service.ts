@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 export class CategoryService {
   constructor(private http: HttpClient) {}
   getAllCategories(): Observable<any> {
-    return this.http.get(`http://localhost:4000/api/categories`);
+    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/categories`);
   }
   getSpecificCategory(name: string | null): Observable<any> {
-    return this.http.get(`http://localhost:4000/api/categories/${name}`);
+    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/categories/${name}`);
   }
 }
