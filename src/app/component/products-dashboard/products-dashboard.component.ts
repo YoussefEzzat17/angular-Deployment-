@@ -265,6 +265,7 @@ export class ProductsDashboardComponent {
   getAllCategories() {
     this.CategoryService.getAllCategories().subscribe({
       next: (res) => {
+        console.log(res);
         res.data.map((cat: any) => this.allCategories.push(cat.name));
       },
       error: (err) => {
