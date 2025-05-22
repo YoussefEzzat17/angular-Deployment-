@@ -12,7 +12,7 @@ export class AuthService {
   private _Router = inject(Router);
   private http = inject(HttpClient);
   userData = null;
-  private baseUrl = 'http://localhost:4000/api/auth';
+  private baseUrl = 'https://ecommerceapi-production-8d5f.up.railway.app/api/auth';
   setRegisterForm(data: object): Observable<any> {
     return this.http.post(`${this.baseUrl}/signup`, data);
   }
