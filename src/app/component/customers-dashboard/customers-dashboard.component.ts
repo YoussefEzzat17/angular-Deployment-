@@ -32,7 +32,7 @@ export class CustomersDashboardComponent {
     private cdr: ChangeDetectorRef
   ) {}
 
-  serverURL = 'http://localhost:4000/uploads/';
+  serverURL = 'https://ecommerceapi-production-8d5f.up.railway.app/uploads/';
   adminID = '';
 
   ngOnInit(): void {
