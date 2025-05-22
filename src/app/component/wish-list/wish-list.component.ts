@@ -14,7 +14,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 })
 export class WishListComponent implements OnDestroy {
   wishlistService = inject(WishlistService);
-  serverURL = 'http://localhost:4000/uploads/';
+  serverURL = 'https://ecommerceapi-production-8d5f.up.railway.app/uploads/';
   private readonly loadData$ = new BehaviorSubject(true);
   wishlistItems = toSignal(this.loadWhishList);
   carouselOptions = {
