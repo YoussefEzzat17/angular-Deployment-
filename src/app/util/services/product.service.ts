@@ -16,21 +16,21 @@ export class ProductService {
   headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
 
   getAllProducts(): Observable<any> {
-    return this.http.get(`http://localhost:4000/api/products`);
+    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/products`);
   }
   getSpecificProduct(id: string): Observable<any> {
-    return this.http.get(`http://localhost:4000/api/product/${id}`, {
+    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/product/${id}`, {
       headers: this.headers,
     });
   }
   getAllComments(id: string): Observable<any> {
-    return this.http.get(`http://localhost:4000/api/product/comment/${id}`, {
+    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/product/comment/${id}`, {
       headers: this.headers,
     });
   }
   addComment(id: string, comment: any): Observable<any> {
     return this.http.post(
-      `http://localhost:4000/api/product/comment/${id}`,
+      `https://ecommerceapi-production-8d5f.up.railway.app/api/product/comment/${id}`,
       comment,
       {
         headers: this.headers,
@@ -40,7 +40,7 @@ export class ProductService {
 
   deleteComment(productId: string, commentId: string): Observable<any> {
     return this.http.delete(
-      `http://localhost:4000/api/product/comment/${productId}/${commentId}`,
+      `https://ecommerceapi-production-8d5f.up.railway.app/api/product/comment/${productId}/${commentId}`,
       {
         headers: this.headers,
       }
@@ -52,7 +52,7 @@ export class ProductService {
     comment: string
   ): Observable<any> {
     return this.http.patch(
-      `http://localhost:4000/api/product/comment/${productId}/${commentId}`,
+      `https://ecommerceapi-production-8d5f.up.railway.app/api/product/comment/${productId}/${commentId}`,
       { comment },
       {
         headers: this.headers,
