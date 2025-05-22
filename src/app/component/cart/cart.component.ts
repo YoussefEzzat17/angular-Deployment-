@@ -25,7 +25,7 @@ export class CartComponent implements OnInit, OnDestroy {
   cartCount: number = 0;
   private subscriptions = new Subscription();
 
-  serverURL = 'http://localhost:4000/uploads/';
+  serverURL = 'https://ecommerceapi-production-8d5f.up.railway.app/uploads/';
 
   constructor(
     private cartService: CartService,
