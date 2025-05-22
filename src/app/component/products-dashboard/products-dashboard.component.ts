@@ -24,6 +24,9 @@ export class ProductsDashboardComponent {
   ngOnInit(): void {
     this.DashboardService.getAllAdminProducts().subscribe({
       next: (res) => {
+        if(res.status=="fail"){
+          return;
+        }
         this.productList = res.products;
         this.getAllCategories();
       },
