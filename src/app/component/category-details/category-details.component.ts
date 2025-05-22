@@ -32,7 +32,7 @@ export class CategoryDetailsComponent implements OnInit, OnDestroy {
   private wishlistService = inject(WishlistService);
   private readonly loadData$ = new BehaviorSubject(true);
   wishlistItems = toSignal(this.loadWhishList);
-  serverURL = 'http://localhost:4000/uploads/';
+  serverURL = 'https://ecommerceapi-production-8d5f.up.railway.app/uploads/';
   // Owl Carousel Options
   carouselOptions = {
     items: 1,
