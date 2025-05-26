@@ -22,13 +22,13 @@ export class ProductsDashboardComponent {
   ) {}
 
   ngOnInit(): void {
+    this.getAllCategories();
     this.DashboardService.getAllAdminProducts().subscribe({
       next: (res) => {
         if(res.status=="fail"){
           return;
         }
         this.productList = res.products;
-        this.getAllCategories();
       },
       error: (err) => console.error(err),
     });
