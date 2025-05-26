@@ -71,7 +71,7 @@
               crossorigin="anonymous"
               [src]="
                 product.imageCover.startsWith('user')
-                  ? serverURL + productList[uniqueProduct[+$index]].imageCover
+                  ? productList[uniqueProduct[+$index]].imageCover
                   : product.imageCover
               "
               class="rounded-circle"
