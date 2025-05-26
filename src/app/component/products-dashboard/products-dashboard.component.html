@@ -26,11 +26,7 @@
         <td>
           <img
             crossorigin="anonymous"
-            [src]="
-              product.imageCover.startsWith('user')
-                ? serverURL + product.imageCover
-                : product.imageCover
-            "
+            [src]="product.imageCover"
             class="rounded-circle object-fit-cover"
             alt="Product 1"
           />
