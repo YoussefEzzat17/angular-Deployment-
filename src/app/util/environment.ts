@@ -1,5 +1,5 @@
 const environment={
-  baseUrl:"http://localhost:4000"
+  baseUrl:"https://ecommerceapi-production-8d5f.up.railway.app"
 }
 
 
