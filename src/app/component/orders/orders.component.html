@@ -27,16 +27,16 @@
             <div>
               <img
                 crossorigin="anonymous"
-                [src]="item.productDetails.imageCover"
+                [src]="item.imageCover"
                 alt="img"
               />
               <span class="quantity">x{{ item.quantity }}</span>
             </div>
             <div class="ms-3">
-              <p class="fw-medium">{{ item.productDetails.category.name }}</p>
-              <h4 class="lead">{{ item.productDetails.title }}</h4>
+              <p class="fw-medium">{{ item.category.name }}</p>
+              <h4 class="lead">{{ item.title }}</h4>
               <p>
-                <span class="fw-medium">{{ item.productDetails.price }} EGP</span>
+                <span class="fw-medium">{{ item.price }} EGP</span>
               </p>
             </div>
           </div>
