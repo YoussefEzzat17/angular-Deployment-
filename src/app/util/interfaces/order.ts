@@ -7,7 +7,7 @@ export interface IOrder{
     phone:string,
     address:string
   };
-  products:any;
+  products:Iproduct[];
     total?:number
 
 }
