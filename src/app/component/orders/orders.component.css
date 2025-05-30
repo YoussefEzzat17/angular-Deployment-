@@ -141,3 +141,7 @@ section .secuirty p {
 .bigCon hr:last-child {
   display: none;
 }
+
+.priceColor {
+  color: #dc3545;
+}

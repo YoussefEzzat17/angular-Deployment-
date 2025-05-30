@@ -39,7 +39,7 @@
               <p class="fw-medium">{{ item.category.name }}</p>
               <h4 class="lead pro-title" [title]="item.title">{{ item.title.split(" ").slice(0,4).join(" ") }} ...</h4>
               <p> 
-                <span class="fw-medium">{{ item.price }} EGP</span>
+                <span class="fw-medium priceColor">{{ item.price }} EGP</span>
               </p>
             </div>
           </div>
@@ -69,9 +69,9 @@
             <h5>Shipping :</h5>
             <p>{{ 15 | number : "1.0-0" }} EGP</p>
           </div>
-          <div>
-            <h5>Total :</h5>
-            <p>{{ total() + 15 | number : "1.0-0" }} EGP</p>
+          <div >
+            <h5 class="fw-medium priceColor">Total :</h5>
+            <p class="priceColor fw-medium">{{ total() + 15 | number : "1.0-0" }} EGP</p>
           </div>
         </div>
       </div>
