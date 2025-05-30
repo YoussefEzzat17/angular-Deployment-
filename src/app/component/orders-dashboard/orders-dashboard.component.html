@@ -1,7 +1,12 @@
-<h3 class="lead mb-3 fs-3 fw-medium">Orders</h3>
+<!-- <h3 class="lead mb-3 fs-3 fw-medium">Orders</h3> -->
 
-<div class="table-responsive rounded-2 mb-4">
-  <table class="table table-dark table-striped table-hover">
+  <h3 class="py-2 section-title">Orders </h3>
+
+
+<div class="table-responsive rounded-4 shadow mb-5 border border-secondary">
+  <table
+    class="table table-dark table-hover align-middle text-center table-bordered mb-0"
+  >
     <thead>
       <tr>
         <th class="py-3 fw-normal" scope="col">Order ID</th>
@@ -37,10 +42,11 @@
         <td class="py-3">{{ order.createdAt.split("T")[0] }}</td>
         <td class="py-3">
           <button
-            class="btn btn-success btn-sm"
+            title="Complete"
+            class="btn btn-success"
             (click)="completeOrder(order._id)"
           >
-            Completed
+            <i class="fa-solid fa-truck"></i>
           </button>
         </td>
       </tr>

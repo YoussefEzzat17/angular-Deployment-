@@ -1,29 +1,29 @@
-import { DashboardService } from './../../util/services/dashboard.service';
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { jwtDecode } from 'jwt-decode';
-import { DecodedToken } from '../../util/interfaces/iproduct';
+import { DashboardService } from "./../../util/services/dashboard.service";
+import { ChangeDetectorRef, Component } from "@angular/core";
+import { jwtDecode } from "jwt-decode";
+import { DecodedToken } from "../../util/interfaces/iproduct";
 
 @Component({
-  selector: 'app-customers-dashboard',
+  selector: "app-customers-dashboard",
   imports: [],
-  templateUrl: './customers-dashboard.component.html',
-  styleUrl: './customers-dashboard.component.css',
+  templateUrl: "./customers-dashboard.component.html",
+  styleUrl: "./customers-dashboard.component.css",
 })
 export class CustomersDashboardComponent {
   customersAllOrders = [
     {
-      _id: '',
-      products: [{ title: '', adminId: '' }],
+      _id: "",
+      products: [{ title: "", adminId: "" }],
       userDetails: {
-        _id: '',
-        username: '',
-        avatar: '',
-        phone: '',
-        email: '',
+        _id: "",
+        username: "",
+        avatar: "",
+        phone: "",
+        email: "",
       },
-      total: '',
-      createdAt: '',
-      userId: '',
+      total: "",
+      createdAt: "",
+      userId: "",
     },
   ];
 
@@ -32,17 +32,17 @@ export class CustomersDashboardComponent {
     private cdr: ChangeDetectorRef
   ) {}
 
-  serverURL = 'https://ecommerceapi-production-8d5f.up.railway.app/uploads/';
-  adminID = '';
+  serverURL = "https://ecommerceapi-production-8d5f.up.railway.app/uploads/";
+  adminID = "";
 
   ngOnInit(): void {
     const token = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('userToken='))
-      ?.split('=')[1];
+      .split("; ")
+      .find((row) => row.startsWith("userToken="))
+      ?.split("=")[1];
 
     if (!token) {
-      throw new Error('User token not found in cookies');
+      throw new Error("User token not found in cookies");
     }
 
     const decodedToken = jwtDecode<DecodedToken>(token);
@@ -50,7 +50,6 @@ export class CustomersDashboardComponent {
 
     this.DashboardService.getAllAdminCustomers(decodedToken.userID).subscribe({
       next: (res) => {
-        console.log(res.customers);
         this.customersAllOrders = res.customers;
         this.getAllUserData();
       },
@@ -76,15 +75,10 @@ export class CustomersDashboardComponent {
       }
     }
 
-    console.log(this.uniqueUserID);
-    console.log(this.customersDetails);
-
     let count = 0;
     for (let userID of this.uniqueUserID) {
       this.DashboardService.getUserById(userID).subscribe({
         next: (res) => {
-          console.log(res);
-
           this.customersDetails[count++] = res.data[0];
         },
         error: (err) => console.error(err),

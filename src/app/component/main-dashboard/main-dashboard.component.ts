@@ -1,38 +1,38 @@
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { DashboardService } from './../../util/services/dashboard.service';
-import { Component } from '@angular/core';
-import { jwtDecode } from 'jwt-decode';
-import { DecodedToken, Iproduct } from '../../util/interfaces/iproduct';
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { DashboardService } from "./../../util/services/dashboard.service";
+import { Component } from "@angular/core";
+import { jwtDecode } from "jwt-decode";
+import { DecodedToken, Iproduct } from "../../util/interfaces/iproduct";
 
 @Component({
-  selector: 'app-main-dashboard',
+  selector: "app-main-dashboard",
   imports: [NgxChartsModule],
-  templateUrl: './main-dashboard.component.html',
-  styleUrl: './main-dashboard.component.css',
+  templateUrl: "./main-dashboard.component.html",
+  styleUrl: "./main-dashboard.component.css",
 })
 export class MainDashboardComponent {
   view: [number, number] = [400, 250];
   Staticview: [number, number] = [400, 250];
   gaugeData = [
     {
-      name: 'Sales',
+      name: "Sales",
       value: 75,
     },
   ];
-  colorScheme = 'vivid';
+  colorScheme = "vivid";
 
   Staticsdata: { name: string; value: number }[] = [];
 
   usersCustomers = [
     {
-      _id: '',
-      products: [{ title: '', adminId: '', price: 0 }],
-      total: '',
-      createdAt: '',
-      userId: '',
-      adminId: '',
+      _id: "",
+      products: [{ title: "", adminId: "", price: 0 }],
+      total: "",
+      createdAt: "",
+      userId: "",
+      adminId: "",
       orders: {},
-      userDetails: { _id: '' },
+      userDetails: { _id: "" },
     },
   ];
 
@@ -40,17 +40,17 @@ export class MainDashboardComponent {
 
   uniqueProduct: number[] = [];
 
-  adminID = '';
+  adminID = "";
   allAdminProducts: number = 0;
   productList: Iproduct[] = [];
   ngOnInit(): void {
     const token = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('userToken='))
-      ?.split('=')[1];
+      .split("; ")
+      .find((row) => row.startsWith("userToken="))
+      ?.split("=")[1];
 
     if (!token) {
-      throw new Error('User token not found in cookies');
+      throw new Error("User token not found in cookies");
     }
 
     const decodedToken = jwtDecode<DecodedToken>(token);
@@ -58,8 +58,6 @@ export class MainDashboardComponent {
 
     this.DashboardService.getAllAdminCustomers(decodedToken.userID).subscribe({
       next: (res) => {
-        console.log(res.customers);
-
         this.usersCustomers = res.customers;
         this.getTotalSales();
         this.getAllUserData();
@@ -85,8 +83,6 @@ export class MainDashboardComponent {
             }
           }
         }
-
-        console.log(this.uniqueProduct);
 
         if (this.productList.length >= 4) {
           this.Staticsdata = [
@@ -164,5 +160,5 @@ export class MainDashboardComponent {
     }
   }
 
-  serverURL = 'https://ecommerceapi-production-8d5f.up.railway.app/uploads/';
+  serverURL = "https://ecommerceapi-production-8d5f.up.railway.app/uploads/";
 }

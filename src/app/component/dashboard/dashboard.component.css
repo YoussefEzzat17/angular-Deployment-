@@ -2,7 +2,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-content: flex-start;
   height: calc(100vh - 56px);
+  gap: 15px;
 }
 .sideNav {
   width: 20%;
@@ -12,14 +14,11 @@ section {
   margin-top: 10px;
 }
 
-
-
 @media (max-width: 991px) {
   .sideNav {
-  width: 15%;
-}
-section {
-  width: 85%;
-  /* margin-top: 16px; */
-}
+    width: 100%;
+  }
+  section {
+    width: 100%;
+  }
 }

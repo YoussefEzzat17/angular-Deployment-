@@ -1,7 +1,8 @@
-<h3 class="lead mb-3 fs-3 fw-medium">Customers</h3>
-
-<div class="table-responsive rounded-2 mb-4">
-  <table class="table table-dark table-striped table-hover">
+<h3 class="py-2 section-title">Customers</h3>
+<div class="table-responsive rounded-4 shadow mb-5 border border-secondary">
+  <table
+    class="table table-dark table-hover align-middle text-center table-bordered mb-0"
+  >
     <thead>
       <tr>
         <th class="py-3 fw-normal" scope="col">Image</th>
@@ -11,8 +12,8 @@
       </tr>
     </thead>
     <tbody>
-      @if(customersDetails.length !== 0){ @for (customer of customersDetails; track
-      $index) {
+      @if(customersDetails.length !== 0){ @for (customer of customersDetails;
+      track $index) {
 
       <tr>
         <td>

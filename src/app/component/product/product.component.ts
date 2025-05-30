@@ -87,7 +87,6 @@ export class ProductComponent {
         this.randomIndexesOfProducts.push(randomNum);
       }
     }
-    console.log(this.randomIndexesOfProducts);
   }
 
   ngOnInit(): void {
