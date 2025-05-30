@@ -40,7 +40,7 @@ export class ProductsDashboardComponent {
         this.productList = this.productList.filter(
           (product) => product._id !== id
         );
-        this.snackBar.open("Product Deleted Successfully", "", {
+        this.snackBar.open("Product Deleted Successfully", "close", {
           duration: 4000,
           panelClass: ["custom-snackbar"],
           verticalPosition: "top",
@@ -49,7 +49,7 @@ export class ProductsDashboardComponent {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        this.snackBar.open("Error In Deleted Product", "", {
+        this.snackBar.open("Error In Deleted Product", "close", {
           duration: 4000,
           panelClass: ["custom-snackbar"],
           verticalPosition: "top",
@@ -136,7 +136,7 @@ export class ProductsDashboardComponent {
 
         const firstErrorMessage = errors[firstKey].message;
 
-        this.snackBar.open(firstErrorMessage, "", {
+        this.snackBar.open(firstErrorMessage, "close", {
           duration: 4000,
           panelClass: ["custom-snackbar"],
           verticalPosition: "top",
@@ -209,7 +209,7 @@ export class ProductsDashboardComponent {
       !this.productToEdit.category.name ||
       this.productToEdit.category.name.trim().length === 0
     ) {
-      this.snackBar.open("Category is required", "", {
+      this.snackBar.open("Category is required", "close", {
         duration: 4000,
         panelClass: ["custom-snackbar"],
         verticalPosition: "top",
@@ -223,7 +223,7 @@ export class ProductsDashboardComponent {
       this.productToEdit.price === undefined ||
       this.productToEdit.price.toString().trim().length === 0
     ) {
-      this.snackBar.open("Price is required", "", {
+      this.snackBar.open("Price is required", "close", {
         duration: 4000,
         panelClass: ["custom-snackbar"],
         verticalPosition: "top",
@@ -263,7 +263,7 @@ export class ProductsDashboardComponent {
 
         const firstErrorMessage = errors[firstKey].message;
 
-        this.snackBar.open(firstErrorMessage, "", {
+        this.snackBar.open(firstErrorMessage, "close", {
           duration: 4000,
           panelClass: ["custom-snackbar"],
           verticalPosition: "top",

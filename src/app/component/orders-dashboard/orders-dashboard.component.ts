@@ -71,7 +71,7 @@ export class OrdersDashboardComponent {
       next: (res) => {
         console.log(res);
         if (res.status === 'success') {
-          this.snackBar.open('Order completed successfully', '', {
+          this.snackBar.open('Order completed successfully', 'close', {
             duration: 4000,
             panelClass: ['custom-snackbar'],
             verticalPosition: 'top',

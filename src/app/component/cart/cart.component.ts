@@ -102,7 +102,7 @@ export class CartComponent implements OnInit, OnDestroy {
       (response) => {
         if (response.status === 'success') {
           this.loadCart();
-          this.snackBar.open('Product deleted successfully', '', {
+          this.snackBar.open('Product deleted successfully', 'close', {
             duration: 4000,
             panelClass: ['custom-snackbar'],
             verticalPosition: 'top',
@@ -111,7 +111,7 @@ export class CartComponent implements OnInit, OnDestroy {
         }
       },
       (error) => {
-        this.snackBar.open('Failed in deleted Product', '', {
+        this.snackBar.open('Failed in deleted Product', 'close', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
           verticalPosition: 'top',

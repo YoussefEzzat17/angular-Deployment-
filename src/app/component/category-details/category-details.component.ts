@@ -97,7 +97,7 @@ export class CategoryDetailsComponent implements OnInit, OnDestroy {
     this.cartService.addToCart(productId).subscribe(
       (response) => {
         if (response.status === 'success') {
-          this.snackBar.open('Product added to cart!', '', {
+          this.snackBar.open('Product added to cart!', 'close', {
             duration: 3000,
             panelClass: ['custom-snackbar'],
             verticalPosition: 'top',
@@ -108,14 +108,14 @@ export class CategoryDetailsComponent implements OnInit, OnDestroy {
       },
       (error) => {
         if (error.error.message === 'Product already in cart') {
-          this.snackBar.open('Product is already in your cart!', '', {
+          this.snackBar.open('Product is already in your cart!', 'close', {
             duration: 4000,
             panelClass: ['custom-snackbar'],
             verticalPosition: 'top',
             horizontalPosition: 'right',
           });
         } else {
-          this.snackBar.open('Something went wrong!', '', {
+          this.snackBar.open('Something went wrong!', 'close', {
             duration: 4000,
             panelClass: ['custom-snackbar'],
             verticalPosition: 'top',
@@ -143,7 +143,7 @@ export class CategoryDetailsComponent implements OnInit, OnDestroy {
     this.wishlistService.removeFromWishlist(productId).subscribe({
       next: () => {
         this.loadData$.next(true);
-        this.snackBar.open('Product removed from wishlist successfully', '', {
+        this.snackBar.open('Product removed from wishlist successfully', 'close', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
           verticalPosition: 'top',
@@ -151,7 +151,7 @@ export class CategoryDetailsComponent implements OnInit, OnDestroy {
         });
       },
       error: (err) => {
-        this.snackBar.open('Failed in removed product from wishlist', '', {
+        this.snackBar.open('Failed in removed product from wishlist', 'close', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
           verticalPosition: 'top',
@@ -165,7 +165,7 @@ export class CategoryDetailsComponent implements OnInit, OnDestroy {
     this.wishlistService.addToWishlist(productId).subscribe({
       next: () => {
         this.loadData$.next(true);
-        this.snackBar.open('Product added to wishlist successfully', '', {
+        this.snackBar.open('Product added to wishlist successfully', 'close', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
           verticalPosition: 'top',
@@ -173,7 +173,7 @@ export class CategoryDetailsComponent implements OnInit, OnDestroy {
         });
       },
       error: (err) => {
-        this.snackBar.open('Failed in added product to wishlist', '', {
+        this.snackBar.open('Failed in added product to wishlist', 'close', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
           verticalPosition: 'top',
