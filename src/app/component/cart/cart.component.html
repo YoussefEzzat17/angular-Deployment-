@@ -47,9 +47,14 @@
                         item.productId?.title.split(" ").slice(0, 4).join(" ")
                       }}...
                     </p>
-                    <small class="text-muted">{{
-                      item.productId?.category?.name || "N/A"
-                    }}</small>
+
+                    <small
+                      class="text-muted catLink"
+                      routerLink="/categories/{{
+                        item.productId?.category?.name
+                      }}"
+                      >{{ item.productId?.category?.name || "N/A" }}</small
+                    >
                   </div>
                 </div>
               </td>
@@ -126,7 +131,9 @@
               "
             />
             <div>
-              <p class="mb-1 fw-bold">{{ item.productId?.title }}</p>
+              <p class="mb-1 fw-bold" [title]="item.productId?.title">
+                {{ item.productId?.title.split(" ").slice(0, 4).join(" ") }}...
+              </p>
               <span
                 class="text-muted catLink"
                 routerLink="/categories/{{ item.productId?.category?.name }}"
@@ -135,9 +142,9 @@
             </div>
           </div>
 
-          <div class="mb-2 text-muted">
+          <div class="mb-2 text-muted ">
             <strong>Price :</strong>
-            <span class="priceColor"
+            <span class="priceColor "
               >{{ " " }}{{ item.productId?.price | number : "1.0-0" }} EGP
             </span>
           </div>
@@ -166,7 +173,7 @@
                 <i class="fa-solid fa-trash"></i>
               </button>
             </div>
-            <div class="fs-5 fw-semibold">
+            <div class="fs-5 fw-medium priceColor">
               {{ item.productId?.price * item.quantity | number : "1.0-0" }} EGP
             </div>
           </div>
@@ -202,7 +209,7 @@
       </div> -->
 
       <!-- Cart Summary Section -->
-      <div class="border p-3 rounded shadow-sm bg-white mb-5">
+      <div class="border p-3 rounded shadow-sm bg-white mb-3">
         <div class="d-flex justify-content-between mb-2">
           <span>Subtotal :</span>
           <span> {{ totalCheckout | number : "1.0-0" }} EGP</span>
