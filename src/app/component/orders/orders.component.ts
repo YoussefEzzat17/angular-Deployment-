@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { OrderService } from '../../util/services/order.service';
 import { IOrder } from '../../util/interfaces/order';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css'
 })

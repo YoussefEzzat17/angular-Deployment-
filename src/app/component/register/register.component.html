@@ -1,15 +1,17 @@
-<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center px-3">
-  <div class="row w-100 rounded-4" style="max-width: 1300px;">
+<div
+  class="container-fluid min-vh-100 d-flex align-items-center justify-content-center px-3"
+>
+  <div class="row w-100 rounded-4" style="max-width: 1300px">
     <!-- Left side (Register Form) -->
     <div class="col-md-6 bg-white p-3 p-md-5">
       <h2 class="fw-bold text-center mb-4 mb-md-5">Create Account</h2>
 
       <!-- Error message -->
-      <div *ngIf="errorMessage" class="message error-message">
+      <!-- <div *ngIf="errorMessage" class="message error-message">
         <mat-icon class="me-2">error</mat-icon>
         <span>{{ errorMessage }}</span>
         <button type="button" class="close-btn" (click)="clearError()">×</button>
-      </div>
+      </div> -->
 
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
         <!-- Username Field -->
@@ -17,14 +19,25 @@
           <input
             formControlName="username"
             type="text"
-            class="form-control"
+            class="form-control rounded-3"
             placeholder="Name"
-            [ngClass]="{ 'is-invalid': registerForm.get('username')?.invalid && (registerForm.get('username')?.touched  || registerForm.get('username')?.dirty) }"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('username')?.invalid &&
+                (registerForm.get('username')?.touched ||
+                  registerForm.get('username')?.dirty)
+            }"
           />
-          <div class="invalid-feedback" *ngIf="registerForm.get('username')?.hasError('required')">
+          <div
+            class="invalid-feedback"
+            *ngIf="registerForm.get('username')?.hasError('required')"
+          >
             Name is required
           </div>
-          <div class="invalid-feedback" *ngIf="registerForm.get('username')?.hasError('pattern')">
+          <div
+            class="invalid-feedback"
+            *ngIf="registerForm.get('username')?.hasError('pattern')"
+          >
             Username must contain only letters and numbers
           </div>
         </div>
@@ -34,40 +47,133 @@
           <input
             formControlName="email"
             type="email"
-            class="form-control"
+            class="form-control rounded-3"
             placeholder="Email"
-            [ngClass]="{ 'is-invalid': registerForm.get('email')?.invalid && (registerForm.get('email')?.touched|| registerForm.get('email')?.dirty) }"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('email')?.invalid &&
+                (registerForm.get('email')?.touched ||
+                  registerForm.get('email')?.dirty)
+            }"
           />
-          <div class="invalid-feedback" *ngIf="registerForm.get('email')?.hasError('required')">
+          <div
+            class="invalid-feedback"
+            *ngIf="registerForm.get('email')?.hasError('required')"
+          >
             Email is required
           </div>
-          <div class="invalid-feedback" *ngIf="registerForm.get('email')?.hasError('email')">
+          <div
+            class="invalid-feedback"
+            *ngIf="registerForm.get('email')?.hasError('email')"
+          >
             Please enter a valid email
           </div>
         </div>
 
         <!-- Password Field -->
-        <div class="mb-3 position-relative">
-          <input
-            formControlName="password"
-            type="password"
-            class="form-control"
-            placeholder="Password"
-            [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && (registerForm.get('password')?.touched|| registerForm.get('password')?.dirty) }"
-          />
-          <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('required')">
+        <!-- <div class="mb-3 position-relative">
+          <div class="">
+            <input
+              formControlName="password"
+             [type]="showPassword ? 'text' : 'password'"
+              class="form-control rounded-3"
+              placeholder="Password"
+              [ngClass]="{
+                'is-invalid':
+                  registerForm.get('password')?.invalid &&
+                  (registerForm.get('password')?.touched ||
+                    registerForm.get('password')?.dirty)
+              }"
+            />
+            <i
+              class="eye-icon position-absolute"
+              [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
+              (click)="togglePasswordVisibility()"
+            >
+            </i>
+             <i
+              *ngIf="
+                registerForm.get('password')?.invalid &&
+                registerForm.get('password')?.touched
+              "
+              class="fa fa-exclamation-circle text-danger position-absolute"
+              style="
+                right: 2.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 1rem;
+              "
+            ></i>
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="registerForm.get('password')?.hasError('required')"
+          >
             Password is required
           </div>
-          <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('minlength')">
+          <div
+            class="invalid-feedback"
+            *ngIf="registerForm.get('password')?.hasError('minlength')"
+          >
             Password must be at least 6 characters
           </div>
-          
-          <!-- Eye icon inside the input -->
-          <i 
-            class="eye-icon" 
-            [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'" 
-            (click)="togglePasswordVisibility()">
-          </i>
+        </div> -->
+
+        <div class="form-group mb-3 position-relative">
+          <div class="input-container">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              class="form-control rounded-3 shadow-sm mb-1"
+              placeholder="Password"
+              [ngClass]="{
+                'is-invalid':
+                  registerForm.get('password')?.invalid &&
+                  registerForm.get('password')?.touched
+              }"
+            />
+            <i
+              class="eye-icon"
+              [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
+              (click)="togglePasswordVisibility()"
+            >
+            </i>
+            <i
+              *ngIf="
+                registerForm.get('password')?.invalid &&
+                registerForm.get('password')?.touched
+              "
+              class="fa fa-exclamation-circle text-danger position-absolute"
+              style="
+                right: 2.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 1rem;
+              "
+            ></i>
+          </div>
+          <div
+            *ngIf="
+              registerForm.get('password')?.invalid &&
+              registerForm.get('password')?.touched
+            "
+            class="text-danger"
+          >
+            <small *ngIf="registerForm.get('password')?.hasError('required')"
+              >Password is required.</small
+            >
+          </div>
+          <div
+            *ngIf="
+              registerForm.get('password')?.invalid &&
+              registerForm.get('password')?.touched
+            "
+            class="text-danger"
+          >
+            <small *ngIf="registerForm.get('password')?.hasError('minlength')">
+              Password must be at least 6 characters
+            </small>
+          </div>
         </div>
 
         <!-- Phone Field -->
@@ -75,11 +181,19 @@
           <input
             formControlName="phone"
             type="text"
-            class="form-control"
+            class="form-control rounded-3"
             placeholder="Phone"
-            [ngClass]="{ 'is-invalid': registerForm.get('phone')?.invalid && (registerForm.get('phone')?.touched  || registerForm.get('phone')?.dirty) }"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('phone')?.invalid &&
+                (registerForm.get('phone')?.touched ||
+                  registerForm.get('phone')?.dirty)
+            }"
           />
-          <div class="invalid-feedback" *ngIf="registerForm.get('phone')?.hasError('required')">
+          <div
+            class="invalid-feedback"
+            *ngIf="registerForm.get('phone')?.hasError('required')"
+          >
             Phone is required
           </div>
         </div>
@@ -88,39 +202,60 @@
         <div class="mb-4">
           <div class="d-flex px-3">
             <div class="flex-fill">
-              <input type="radio" id="userRole" formControlName="role" value="user" class="btn-check" autocomplete="off">
-              <label class="btn btn-outline-primary w-75 ms-3 py-3 d-flex flex-column justify-content-center align-items-center" for="userRole">
+              <input
+                type="radio"
+                id="userRole"
+                formControlName="role"
+                value="user"
+                class="btn-check"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary w-75 ms-3 py-2 rounded-3 d-flex flex-column justify-content-center align-items-center"
+                for="userRole"
+              >
                 <span>User</span>
               </label>
             </div>
-            
+
             <div class="flex-fill">
-              <input type="radio" id="adminRole" formControlName="role" value="admin" class="btn-check" autocomplete="off">
-              <label class="btn btn-outline-primary w-75 me-3 py-3 d-flex flex-column justify-content-center align-items-center" for="adminRole">
+              <input
+                type="radio"
+                id="adminRole"
+                formControlName="role"
+                value="admin"
+                class="btn-check"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary w-75 me-3 py-2 rounded-3 d-flex flex-column justify-content-center align-items-center"
+                for="adminRole"
+              >
                 <span>Admin</span>
               </label>
             </div>
           </div>
-          
-          <div class="invalid-feedback d-block" 
-               *ngIf="registerForm.get('role')?.invalid && (registerForm.get('role')?.touched || registerForm.get('role')?.dirty)">
+
+          <div
+            class="invalid-feedback d-block"
+            *ngIf="
+              registerForm.get('role')?.invalid &&
+              (registerForm.get('role')?.touched ||
+                registerForm.get('role')?.dirty)
+            "
+          >
             Please select a role
           </div>
         </div>
 
         <!-- Submit Button -->
-        <div class="d-grid mb-3">
-          <button 
-            type="submit" 
-            class="btn btn-dark shadow" 
-          >
-            Create
-          </button>
+        <div class="d-grid mb-3 mt-4">
+          <button type="submit" class="btn btn-dark shadow">Create</button>
         </div>
 
         <!-- Return to store -->
         <div class="text-center mt-3 small">
-          🛒 
+          🛒
           <a routerLink="/" class="text-decoration-underline text-dark">
             <i class="bi bi-shop me-2"></i>Return to store
           </a>
@@ -129,8 +264,14 @@
     </div>
 
     <!-- Right side (Image) -->
-    <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-white p-3 p-md-5 order-1 order-lg-2">
-      <img src="images/RegisterPhoto.png" alt="Register illustration" class="img-fluid" />
+    <div
+      class="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-white p-3 p-md-5 order-1 order-lg-2"
+    >
+      <img
+        src="images/RegisterPhoto.png"
+        alt="Register illustration"
+        class="img-fluid"
+      />
     </div>
   </div>
 </div>

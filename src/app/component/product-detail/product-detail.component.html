@@ -32,11 +32,11 @@
           @if (!isAdmin) {
 
           <button
-            class="bg-transparent border-0"
+            class="bg-transparent border-0 wishlist-btn"
             (click)="toggleWishlist(productDetails._id)"
           >
             <i
-              class="bi"
+              class="bi love-icon"
               [ngClass]="
                 isItemInWhishlist(productDetails._id)
                   ? 'bi-heart-fill text-danger'
@@ -53,7 +53,7 @@
         <p class="desc text-light-emphasis">
           {{ productDetails.description }}
         </p>
-        <h4 class="fw-bold my-4 text-light-emphasis">
+        <h4 class="fw-bold my-4 text-light-emphasis pro-price">
           {{ productDetails.price }} EGP
         </h4>
         <!-- <div class="quantity my-4">
@@ -73,7 +73,7 @@
         @if (!isAdmin) {
         <div class="btns d-flex justify-content-start">
           <a
-            class="btn btn-light fw-semibold border border-1 btn-sm py-3 px-4 me-3 w-100"
+            class="btn btn-light fw-semibold border border-1 btn-sm py-3 px-4 w-100"
             (click)="addToCart(productDetails._id)"
           >
             ADD TO CART
@@ -120,25 +120,34 @@
             />
           </div>
           <div class="userComment text-light-emphasis flex-grow-1">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <h6 class="fw-bold m-0">{{ userComment.userName }}</h6>
-              <div>
-                <span
-                  >{{ userComment.createdAt | date : "yyyy-MM-dd" }} at
-                  {{ userComment.createdAt | date : "shortTime" }}</span
-                >
+            <div
+              class="d-flex flex-wrap gap-2 gap-sm-0 justify-content-between align-items-center mb-2"
+            >
+              <h6 class="fw-bold m-0">
+                {{ userComment.userName }}
+              </h6>
+              <div class="comment-info">
+                <span class=" mb-2 mb-md-0">
+                  <i
+                    class="fa-solid fa-clock"
+                    [title]="userComment.createdAt | date : 'MMM d, y, h:mm a'"
+                  >
+                  </i>
+                </span>
+
                 @if (userComment.userId === user.userID) {
 
                 <span
-                  class="ms-3 editComment"
+                  class="ms-3 mb-2 mb-md-0 editComment"
                   (click)="editPopupIsOpen(userComment._id)"
                   ><i class="fa-solid fa-pen-to-square"></i
                 ></span>
                 <span
-                  class="ms-2 delComment"
+                  class="ms-3 mb-2 mb-md-0 delComment"
                   (click)="deleteComment(productDetails._id, userComment._id)"
                   ><i class="fa-solid fa-trash"></i
                 ></span>
+
                 }
               </div>
             </div>

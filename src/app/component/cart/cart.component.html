@@ -1,8 +1,8 @@
 <section class="container my-5">
   <h1 class="mb-5 text-center">Shopping Cart 🛒</h1>
-  <div class="row">
+  <div class="row gap-3 gap-lg-0">
     <!-- Left Side - Products -->
-    <div class="col-md-9">
+    <div class="col-lg-9">
       <!-- Desktop View -->
       <div class="d-none d-md-block">
         <table *ngIf="!isLoading" class="table table-hover align-middle">
@@ -42,7 +42,11 @@
                     alt="product image"
                   />
                   <div>
-                    <p class="mb-1 fw-bold">{{ item.productId?.title }}</p>
+                    <p class="mb-1 fw-medium" [title]="item.productId?.title">
+                      {{
+                        item.productId?.title.split(" ").slice(0, 4).join(" ")
+                      }}...
+                    </p>
                     <small class="text-muted">{{
                       item.productId?.category?.name || "N/A"
                     }}</small>
@@ -60,7 +64,7 @@
                   >
                     <i class="fa-solid fa-minus"></i>
                   </button>
-                  <span class="px-2">{{ item.quantity }}</span>
+                  <span class="px-1 fw-medium">{{ item.quantity }}</span>
                   <button
                     class="btn btn-sm btn-outline-secondary"
                     (click)="increaseQuantity(item.productId._id)"
@@ -68,7 +72,7 @@
                     <i class="fa-solid fa-plus"></i>
                   </button>
                   <button
-                    class="btn btn-sm btn-danger ms-3"
+                    class="btn btn-sm btn-danger ms-2"
                     (click)="deleteProduct(item.productId._id)"
                     title="Remove product"
                   >
@@ -76,12 +80,16 @@
                   </button>
                 </div>
               </td>
-              <td class="text-center fs-5 fw-bold text-muted">
-                EG {{ item.productId?.price | number : "1.0-0" }}
+              <td class="text-center fs-6 fw-semibold text-muted">
+                <span>{{ item.productId?.price | number : "1.0-0" }} EGP</span>
               </td>
-              <td class="text-end fs-4 fw-semibold">
-                EG
-                {{ item.productId?.price * item.quantity | number : "1.0-0" }}
+              <td class="text-center fs-6 text-muted fw-semibold">
+                <span
+                  >{{
+                    item.productId?.price * item.quantity | number : "1.0-0"
+                  }}
+                  EGP</span
+                >
               </td>
             </tr>
           </tbody>
@@ -126,8 +134,10 @@
           </div>
 
           <div class="mb-2 text-muted">
-            <strong>Price:</strong> EG
-            {{ item.productId?.price | number : "1.0-0" }}
+            <strong>Price :</strong>
+            <span class="priceColor"
+              >{{ " " }}{{ item.productId?.price | number : "1.0-0" }} EGP
+            </span>
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
@@ -155,7 +165,7 @@
               </button>
             </div>
             <div class="fs-5 fw-semibold">
-              EG {{ item.productId?.price * item.quantity | number : "1.0-0" }}
+              {{ item.productId?.price * item.quantity | number : "1.0-0" }} EGP
             </div>
           </div>
         </div>
@@ -163,7 +173,7 @@
     </div>
 
     <!-- Right Side - Coupon & Summary -->
-    <div class="col-md-3">
+    <div class="col-lg-3">
       <!-- Promo Code Section -->
       <!-- <div class="border p-3 rounded shadow-sm bg-white mb-4">
         <h5 class="mb-3">Promo Code</h5>
@@ -193,28 +203,28 @@
       <div class="border p-3 rounded shadow-sm bg-white mb-5">
         <div class="d-flex justify-content-between mb-2">
           <span>Subtotal:</span>
-          <span>EG {{ totalCheckout | number : "1.0-0" }}</span>
+          <span> {{ totalCheckout | number : "1.0-0" }} EGP</span>
         </div>
 
         <div class="d-flex justify-content-between mb-2" *ngIf="couponApplied">
           <span class="text-success fw-bold">Discount:</span>
-          <span class="text-success fw-bold"
-            >-EG {{ discountAmount || 0 }}</span
+          <span class="text-success fw-bold">
+            - {{ discountAmount || 0 }} EGP</span
           >
         </div>
 
         <div class="d-flex justify-content-between mb-2">
           <span>Shipping:</span>
-          <span>EG 15</span>
+          <span> 15 EGP</span>
         </div>
 
         <hr />
 
         <div class="d-flex justify-content-between fw-bold fs-5">
           <span>Total:</span>
-          <span
-            >EG
-            {{ totalCheckout - discountAmount + 15 | number : "1.0-0" }}</span
+          <span class="priceColor">
+            {{ totalCheckout - discountAmount + 15 | number : "1.0-0" }}
+            EGP</span
           >
         </div>
 

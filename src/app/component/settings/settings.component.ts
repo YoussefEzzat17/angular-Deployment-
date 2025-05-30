@@ -95,12 +95,16 @@ export class SettingsComponent {
         this.snackBar.open('Updated Successfully', 'Close', {
           duration: 3000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
       },
       error: (err) => {
         this.snackBar.open('Failed in updated data', 'Close', {
           duration: 3000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         console.error(err);
       },

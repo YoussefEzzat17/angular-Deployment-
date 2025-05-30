@@ -176,12 +176,16 @@ export class ProductDetailComponent implements OnInit {
         this.snackBar.open(res.message, '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
       },
       error: (err) => {
         this.snackBar.open('Failed in added Comment', '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         console.error(err);
       },
@@ -208,12 +212,16 @@ export class ProductDetailComponent implements OnInit {
         this.snackBar.open(res.message, '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
       },
       error: (err) => {
         this.snackBar.open('Failed in delete comment', '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         console.error(err);
       },
@@ -254,12 +262,16 @@ export class ProductDetailComponent implements OnInit {
         this.snackBar.open(res.message, '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
       },
       error: (err) => {
         this.snackBar.open('Failed in edit comment', '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         console.error(err);
       },
@@ -273,6 +285,8 @@ export class ProductDetailComponent implements OnInit {
           this.snackBar.open('Product added to cart!', '', {
             duration: 4000,
             panelClass: ['custom-snackbar'],
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
           });
           this.router.navigate(['/cart']);
         }
@@ -282,11 +296,15 @@ export class ProductDetailComponent implements OnInit {
           this.snackBar.open('Product is already in your cart!', '', {
             duration: 4000,
             panelClass: ['custom-snackbar'],
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
           });
         } else {
           this.snackBar.open('Something went wrong!', '', {
             duration: 4000,
             panelClass: ['custom-snackbar'],
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
           });
           console.error('Add to cart error:', error);
         }
@@ -312,12 +330,16 @@ export class ProductDetailComponent implements OnInit {
         this.snackBar.open('Product removed from wishlist successfully', '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
       },
       error: (err) => {
         this.snackBar.open('Failed in removed product from wishlist', '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         console.error('Error removing item:', err);
       },
@@ -330,12 +352,16 @@ export class ProductDetailComponent implements OnInit {
         this.snackBar.open('Product added to wishlist successfully', '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
       },
       error: (err) => {
         this.snackBar.open('Failed in added product to wishlist', '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         console.error('Error removing item:', err);
       },

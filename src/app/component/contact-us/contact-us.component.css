@@ -54,7 +54,7 @@ form input[type='submit']:hover{
 }
 
 section .map{
-  width: 95%;
+  width: 100%;
   margin: 40px auto;
   display: block;
 

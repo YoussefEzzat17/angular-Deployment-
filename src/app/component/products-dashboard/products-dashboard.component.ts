@@ -25,7 +25,7 @@ export class ProductsDashboardComponent {
     this.getAllCategories();
     this.DashboardService.getAllAdminProducts().subscribe({
       next: (res) => {
-        if(res.status=="fail"){
+        if (res.status == 'fail') {
           return;
         }
         this.productList = res.products;
@@ -43,6 +43,8 @@ export class ProductsDashboardComponent {
         this.snackBar.open('Product Deleted Successfully', '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         this.cdr.detectChanges();
       },
@@ -50,6 +52,8 @@ export class ProductsDashboardComponent {
         this.snackBar.open('Error In Deleted Product', '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         console.error(err);
       },
@@ -135,6 +139,8 @@ export class ProductsDashboardComponent {
         this.snackBar.open(firstErrorMessage, '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         console.error(err);
       },
@@ -208,6 +214,8 @@ export class ProductsDashboardComponent {
       this.snackBar.open('Category is required', '', {
         duration: 4000,
         panelClass: ['custom-snackbar'],
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
       });
       return;
     }
@@ -220,6 +228,8 @@ export class ProductsDashboardComponent {
       this.snackBar.open('Price is required', '', {
         duration: 4000,
         panelClass: ['custom-snackbar'],
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
       });
       return;
     }
@@ -258,6 +268,8 @@ export class ProductsDashboardComponent {
         this.snackBar.open(firstErrorMessage, '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         console.error(err);
       },

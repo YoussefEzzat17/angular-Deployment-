@@ -410,3 +410,7 @@ section .conCheckout a:hover {
 .empty-cart-message .btn i {
   margin-right: 8px;
 }
+
+.priceColor {
+  color: #dc3545;
+}

@@ -1,5 +1,5 @@
 .popular-products {
-  padding: 5rem 0;
+  padding: 2rem 0;
 }
 
 .section-title {
@@ -25,7 +25,8 @@
   border-radius: 12px;
   overflow: hidden;
   background: white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 4px 1px rgb(146 146 146 / 15%),
+    0px 0px 1px 0px rgb(215 215 215 / 5%);
   transition: all 0.3s ease;
   height: 100%;
   display: flex;
@@ -35,14 +36,13 @@
 
 .product-card:hover {
   transform: translateY(-7px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
 }
-
 .wishlist-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(240, 240, 240, 0.8);
   border: none;
   width: 36px;
   height: 36px;
@@ -55,31 +55,42 @@
   transition: all 0.3s ease;
 }
 
+.love-icon {
+  font-size: 1rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .wishlist-btn:hover {
   background: white;
   transform: scale(1.1);
 }
 
+.wishlist-btn:hover .love-icon {
+  color: #dc3545;
+}
 .wishlist-btn i {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .product-thumbnail {
   width: 100%;
-  height: 300px;
-  object-fit: contain;
+  height: 200px;
   display: block;
+  padding: 10px 0;
 }
 
 .product-card:hover .product-thumbnail {
   transform: scale(1.05);
-    object-fit: contain;
 }
 
 .product-image {
   position: relative;
-  margin-bottom: 25px;
-
 }
 
 .product-details {
@@ -136,15 +147,19 @@
   background: linear-gradient(135deg, #6d5561, #1a1a1a);
   color: white;
   border: none;
-  padding: 0.6rem;
+  padding: 0.4rem;
   border-radius: 1rem;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 16px;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.product-card:hover .add-to-cart-btn {
+  bottom: 0;
 }
 
 .add-to-cart-btn:hover {
@@ -169,16 +184,29 @@
 }
 
 .search-input {
-  width: 60%;
+  width: 50%;
   padding: 0.75rem;
   margin: 1rem;
   font-size: 1rem;
   border-radius: 20px;
   border: 1px solid #ccc;
-  box-shadow: 0 0 3px #795e6b;
   transition: all 0.3s ease;
 }
 
+@media (max-width: 991px) {
+  .search-input {
+    width: 100%;
+    margin: 0;
+  }
+}
+
 .search-input:focus {
-  box-shadow: 0 0 8px #705361;
+  box-shadow: 0 0 3px 2px #ececec;
+}
+
+@media (max-width: 1200px) {
+  .product-details,
+  .product-info {
+    justify-content: center !important;
+  }
 }

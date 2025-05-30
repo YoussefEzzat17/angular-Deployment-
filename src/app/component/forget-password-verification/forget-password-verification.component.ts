@@ -1,50 +1,84 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { AuthService } from '../../util/services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-forget-password-verification',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, MatIconModule, RouterModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MatIconModule,
+    RouterModule,
+  ],
   templateUrl: './forget-password-verification.component.html',
-  styleUrls: ['./forget-password-verification.component.css']
+  styleUrls: ['./forget-password-verification.component.css'],
 })
 export class ForgetPasswordVerificationComponent {
   resetPasswordForm = new FormGroup({
     code: new FormControl('', Validators.required),
-    newPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
+    newPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
   showPassword = false;
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   onSubmit() {
     if (this.resetPasswordForm.invalid) {
       this.resetPasswordForm.markAllAsTouched();
       return;
     }
-    const providedCode  = this.resetPasswordForm.value.code ?? '';
+    const providedCode = this.resetPasswordForm.value.code ?? '';
     const newPassword = this.resetPasswordForm.value.newPassword ?? '';
 
-    this.authService.verifyForgetPassword( providedCode , newPassword).subscribe({
+    this.authService.verifyForgetPassword(providedCode, newPassword).subscribe({
       next: () => {
         this.successMessage = 'Password reset successful!';
         this.errorMessage = null;
 
+        this.snackBar.open(this.successMessage, 'Close', {
+          duration: 3000,
+          panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 2000);
       },
       error: (err) => {
         console.error('Error resetting password:', err.message);
-        this.errorMessage = 'Failed to reset password. Please check your code and then try again.';
+        this.errorMessage =
+          'Failed to reset password. Please check your code and then try again.';
+
+        this.snackBar.open(this.errorMessage, 'Close', {
+          duration: 3000,
+          panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
         this.successMessage = null;
-      }
+      },
     });
   }
 

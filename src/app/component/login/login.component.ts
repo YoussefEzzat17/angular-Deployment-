@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router'; // Import Router for navigation
 import { AuthService } from '../../util/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 // import { LoginService } from './login.service'; // Import the LoginService
 
 @Component({
@@ -28,15 +29,18 @@ import { AuthService } from '../../util/services/auth.service';
 export class LoginComponent {
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
-   showPassword = false;
+  showPassword = false;
   loginError: string | null = null; // <-- error message variable
 
   router = inject(Router);
 
   successMessage: string | null = null;
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private snackBar: MatSnackBar) {
     const nav = this.router.getCurrentNavigation();
     this.successMessage = nav?.extras?.state?.['successMessage'] || null;
 
@@ -61,6 +65,13 @@ export class LoginComponent {
             document.cookie = `userToken=${token}; expires=${expiryDate.toUTCString()}; path=/;`;
             this.loginError = null;
 
+            this.snackBar.open('Login Successfully', 'Close', {
+              duration: 3000,
+              panelClass: ['custom-snackbar'],
+              verticalPosition: 'top',
+              horizontalPosition: 'right',
+            });
+
             this.router.navigate(['/home']);
           } else {
             this.loginError = 'Unexpected response from server.';
@@ -69,6 +80,12 @@ export class LoginComponent {
         error: (err) => {
           console.error('Login failed:', err);
           this.loginError = 'Incorrect email or password.';
+          this.snackBar.open(this.loginError, 'Close', {
+            duration: 3000,
+            panelClass: ['custom-snackbar'],
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+          });
         },
       });
     } else {
@@ -83,7 +100,7 @@ export class LoginComponent {
   goToRegister() {
     this.router.navigate(['/register']);
   }
-    
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }

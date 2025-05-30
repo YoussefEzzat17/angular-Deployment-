@@ -41,4 +41,5 @@ export class BlankNavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
+  
 }

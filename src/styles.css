@@ -157,7 +157,13 @@ body {
 }
 
 .custom-snackbar {
-  position: fixed !important;
-  top: 65px !important;
-  right: 20px !important;
+  color: white !important;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px 24px;
+  text-align: center;
+}
+.cdk-overlay-container {
+  z-index: 9999 !important;
 }

@@ -20,8 +20,6 @@ section div .bigCon .conAddress {
   background: #c2d2e227;
   padding: 14px 20px;
   border-radius: 10px;
-  /* width: 90%; */
-  /* margin:  20px auto 0px; */
 }
 section div .bigCon .conAddress h5 {
   font-size: 20px;
@@ -62,35 +60,38 @@ section div .bigCon .conItems .item div {
   position: relative;
 }
 section div .bigCon .conItems .item img {
-  width: 150px;
+  width: 100px;
 }
+
 section div .bigCon .conItems .item div .quantity {
   position: absolute;
   z-index: 17;
   top: 0px;
   right: 0px;
-  /* background: rgb(208, 203, 203); */
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #333;
-  padding: 6px 10px;
   border-radius: 50%;
-  font-size: 13px;
+  font-size: 12px;
   color: white;
   font-weight: 500;
 }
-/* section div .bigCon .conItems .item div {
-  width: 100%;
-} */
 
-/* section div:last-of-type{
-  width: 800px;
-  flex-basis: 350px;
-} */
-/* @media (max-width:500px) {
-  section div:last-of-type{
-    width: 90%;
-    margin: auto;
+@media (max-width: 991px) {
+  .pro-title {
+    font-size: 16px;
   }
-} */
+  section div .bigCon .conItems .item img {
+    width: 80px;
+  }
+  section div .bigCon .conItems .item div .quantity {
+    width: 25px;
+    height: 25px;
+  }
+}
 
 section .bigCon .conCheckout {
   padding: 10px;
@@ -114,7 +115,6 @@ section .cancelOrder {
   background-color: #c60404;
   color: white;
   border: 2px solid #c60404;
-  /* padding: 5px 10px; */
   padding: 7px 12px;
   border-radius: 7px;
   cursor: pointer;

@@ -1,10 +1,12 @@
 <section class="popular-products">
   <div class="container">
+    <h2 class="section-title mt-4">Wishlist</h2>
+
     <div class="row g-4 py-5">
       @if(wishlistItems()?.length) { @for(product of wishlistItems(); track
       product._id) {
 
-      <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="col-md-6 col-lg-4 col-xl-3">
         <div class="product-card card h-100 border-0">
           <button class="wishlist-btn" (click)="removeItem(product._id)">
             <i class="bi bi-heart-fill text-danger"></i>
@@ -25,34 +27,48 @@
             </owl-carousel-o>
           </div>
 
-          <div
-            class="product-details p-3"
-            routerLink="/products/{{ product._id }}"
-          >
-            <span class="product-category">{{ product.category.name }}</span>
-            <h3 class="product-title one-line">{{ product.title }}</h3>
+          <div class="product-details p-3">
+            <span
+              routerLink="/categories/{{ product.category.name }}"
+              class="product-category d-block fw-normal fs-6 text-center"
+              >{{ product.category.name }}</span
+            >
 
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="price fw-bold text-danger fs-4"
-                >${{ product.price }}</span
+            <div routerLink="/products/{{ product._id }}">
+              <h3 class="product-title one-line fs-6 text-center">
+                {{ product.title }}
+              </h3>
+
+              <div
+                class="product-info d-flex flex-wrap justify-content-between align-items-center gap-2"
               >
-              <span class="rating text-warning d-flex align-items-center gap-1">
-                <div
-                  *ngFor="
-                    let num of [1, 2, 3, 4, 5].slice(0, product.ratingsAverage);
-                    let i = index
-                  "
+                <span class="price fw-bold text-danger fs-5">
+                  {{ product.price }} EGP
+                </span>
+                <span
+                  class="rating text-warning d-flex align-items-center gap-1"
+                  style="width: 110px"
                 >
-                  <i class="fas fa-star"></i>
-                </div>
-                <div *ngIf="product.ratingsAverage % 1 !== 0">
-                  <i class="fa-solid fa-star-half-stroke"></i>
-                </div>
-              </span>
+                  <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                    <i
+                      class="fa-star"
+                      [ngClass]="{
+                        fas: product.ratingsAverage >= star,
+                        'fa-solid fa-star-half-stroke':
+                          product.ratingsAverage >= star - 0.5 &&
+                          product.ratingsAverage < star,
+                        far: product.ratingsAverage < star - 0.5
+                      }"
+                    ></i>
+                  </ng-container>
+                </span>
+              </div>
             </div>
+
             <button
-              class="add-to-cart-btn w-100 mt-3"
-              (click)="addToCart(product)"
+              *ngIf="!isAdmin"
+              class="add-to-cart-btn w-100 mt-3 rounded-4"
+              (click)="addToCart(product._id)"
             >
               Add to Cart
             </button>

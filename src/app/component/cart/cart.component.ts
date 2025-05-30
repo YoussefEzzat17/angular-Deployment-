@@ -105,6 +105,8 @@ export class CartComponent implements OnInit, OnDestroy {
           this.snackBar.open('Product deleted successfully', '', {
             duration: 4000,
             panelClass: ['custom-snackbar'],
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
           });
         }
       },
@@ -112,6 +114,8 @@ export class CartComponent implements OnInit, OnDestroy {
         this.snackBar.open('Failed in deleted Product', '', {
           duration: 4000,
           panelClass: ['custom-snackbar'],
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
         });
         console.error('Failed to remove product:', error);
       }
