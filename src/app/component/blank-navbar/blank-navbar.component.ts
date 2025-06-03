@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../util/services/auth.service';
 import { CartService } from '../../util/services/cart.service';
@@ -6,6 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 import { DecodedToken } from '../../util/interfaces/iproduct';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { WishlistService } from '../../util/services/wishlist.service';
 
 @Component({
   selector: 'app-blank-navbar',
@@ -16,9 +17,11 @@ import { CommonModule } from '@angular/common';
 export class BlankNavbarComponent implements OnInit, OnDestroy {
   _AuthService = inject(AuthService);
   cartService = inject(CartService);
+  WishlistService = inject(WishlistService);
 
   isAdmin: boolean = false;
   cartCount: number = 0;
+  wishListCounter: number = 0;
 
   private subscriptions = new Subscription();
 
@@ -36,10 +39,22 @@ export class BlankNavbarComponent implements OnInit, OnDestroy {
         this.cartCount = count;
       })
     );
+    this.subscriptions.add(
+      this.WishlistService.wishlistCount$.subscribe(count => {
+        this.wishListCounter = count;
+      })
+    );
+    this.cartService.getCart().subscribe({
+      next:(res)=>{
+        // this.cartService.updateCartCount(res.cart.products.length);
+      },
+      error:(err)=>{
+        console.log(err)
+      }
+    })
   }
-
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-  
+
 }

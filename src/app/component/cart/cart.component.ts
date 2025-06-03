@@ -35,11 +35,11 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadCart();
 
-    this.subscriptions.add(
-      this.cartService.cartCount$.subscribe((count) => {
-        this.cartCount = count;
-      })
-    );
+    // this.subscriptions.add(
+    //   this.cartService.cartCount$.subscribe((count) => {
+    //     this.cartCount = count;
+    //   })
+    // );
   }
 
   ngOnDestroy(): void {

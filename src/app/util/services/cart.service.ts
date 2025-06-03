@@ -36,10 +36,12 @@ export class CartService {
   }
 
   addToCart(productId: string): Observable<any> {
-    return this.http.post<any>(
-      `${this.apiUrl}/add`,
-      { productId },
-      this.getTokenHeaders()
+    return this.http.post<any>(this.apiUrl+"/add",{ productId }, this.getTokenHeaders()).pipe(
+      tap(response => {
+        if (response.status === 'success' && response.cart && response.cart.products) {
+          this.updateCartCount(response.cart.products);
+        }
+      })
     );
   }
 
@@ -62,14 +64,28 @@ export class CartService {
   }
 
   removeProduct(productId: string): Observable<any> {
-    return this.http.delete<any>(
-      `${this.apiUrl}/remove/${productId}`,
-      this.getTokenHeaders()
+    // return this.http.delete<any>(
+    //   `${this.apiUrl}/remove/${productId}`,
+    //   this.getTokenHeaders()
+    // );
+    return this.http.delete<any>(this.apiUrl+"/remove/"+ productId , this.getTokenHeaders()).pipe(
+      tap(response => {
+        if (response.status === 'success' && response.cart && response.cart.products) {
+          this.updateCartCount(response.cart.products);
+        }
+      })
     );
   }
 
   clearCart(): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/clear`, this.getTokenHeaders());
+    // return this.http.delete<any>(`${this.apiUrl}/clear`, this.getTokenHeaders());
+    return this.http.delete<any>(this.apiUrl+"/clear" , this.getTokenHeaders()).pipe(
+      tap(response => {
+        if (response.status === 'success') {
+          this.updateCartCount([]);
+        }
+      })
+    );
   }
 
   applyCoupon(code: string): Observable<any> {
