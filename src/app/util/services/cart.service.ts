@@ -98,7 +98,7 @@ export class CartService {
 
 private updateCartCount(products: any[]) {
   const totalQuantity = products.reduce((acc, item) => acc + (item.quantity || 0), 0);
-  this.cartCountSubject.next(totalQuantity);
+  this.cartCountSubject.next(products.length);
 }
 
 }
