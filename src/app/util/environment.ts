@@ -1,5 +1,5 @@
 const environment={
-  baseUrl:"https://ecommerceapi-production-8d5f.up.railway.app"
+  baseUrl:"https://electronics-ecommerce-node-doej.vercel.app"
 }
 
 
