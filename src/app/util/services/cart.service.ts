@@ -6,7 +6,7 @@ import { Observable, BehaviorSubject, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  private apiUrl = 'https://ecommerceapi-production-8d5f.up.railway.app/api/cart';
+  private apiUrl = 'https://electronics-ecommerce-node-doej.vercel.app/api/cart';
 
   private cartCountSubject = new BehaviorSubject<number>(0);
   cartCount$ = this.cartCountSubject.asObservable();
