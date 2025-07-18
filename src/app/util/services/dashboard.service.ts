@@ -21,19 +21,19 @@ export class DashboardService {
   }
 
   getAllAdminProducts(): Observable<any> {
-    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/dashboard`, {
+    return this.http.get(`https://electronics-ecommerce-node-doej.vercel.app/api/dashboard`, {
       headers: this.getToken(),
     });
   }
 
   getproductById(id: string): Observable<any> {
-    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/product/${id}`, {
+    return this.http.get(`https://electronics-ecommerce-node-doej.vercel.app/api/product/${id}`, {
       headers: this.getToken(),
     });
   }
 
   deleteProduct(id: string): Observable<any> {
-    return this.http.delete(`https://ecommerceapi-production-8d5f.up.railway.app/api/product/${id}`, {
+    return this.http.delete(`https://electronics-ecommerce-node-doej.vercel.app/api/product/${id}`, {
       headers: this.getToken(),
     });
   }
@@ -41,14 +41,14 @@ export class DashboardService {
   addProduct(product: any): Observable<any> {
     product.append('sold', '0');
 
-    return this.http.post(`https://ecommerceapi-production-8d5f.up.railway.app/api/product`, product, {
+    return this.http.post(`https://electronics-ecommerce-node-doej.vercel.app/api/product`, product, {
       headers: this.getToken(),
     });
   }
 
   updateProduct(id: string, productFormData: FormData): Observable<any> {
     return this.http.patch(
-      `https://ecommerceapi-production-8d5f.up.railway.app/api/product/${id}`,
+      `https://electronics-ecommerce-node-doej.vercel.app/api/product/${id}`,
       productFormData,
       {
         headers: this.getToken(),
@@ -57,30 +57,30 @@ export class DashboardService {
   }
 
   getAllAdminOrders(adminID: string): Observable<any> {
-    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/order/admin/${adminID}`, {
+    return this.http.get(`https://electronics-ecommerce-node-doej.vercel.app/api/order/admin/${adminID}`, {
       headers: this.getToken(),
     });
   }
   completedOrder(orderID: string): Observable<any> {
-    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/ordercomplate/${orderID}`, {
+    return this.http.get(`https://electronics-ecommerce-node-doej.vercel.app/api/ordercomplate/${orderID}`, {
       headers: this.getToken(),
     });
   }
 
   getAllAdminCustomers(adminID: string): Observable<any> {
-    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/customer/${adminID}`, {
+    return this.http.get(`https://electronics-ecommerce-node-doej.vercel.app/api/customer/${adminID}`, {
       headers: this.getToken(),
     });
   }
 
   getUserById(id: string): Observable<any> {
-    return this.http.get(`https://ecommerceapi-production-8d5f.up.railway.app/api/user/${id}`, {
+    return this.http.get(`https://electronics-ecommerce-node-doej.vercel.app/api/user/${id}`, {
       headers: this.getToken(),
     });
   }
 
   addCategory(data: any): Observable<any> {
-    return this.http.post(`https://ecommerceapi-production-8d5f.up.railway.app/api/categories`, data, {
+    return this.http.post(`https://electronics-ecommerce-node-doej.vercel.app/api/categories`, data, {
       headers: this.getToken(),
     });
   }
